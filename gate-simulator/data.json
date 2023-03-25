@@ -1,0 +1,10 @@
+[
+  {
+    "number": "2222 3333 2222 3333",
+    "status": "APPROVED"
+  },
+  {
+    "number": "3333 4444 3333 4444",
+    "status": "DECLINED"
+  }
+]
