@@ -1,4 +1,5 @@
 # Дипломный проект по профессии «Тестировщик»
+[![Build status](https://ci.appveyor.com/api/projects/status/2216p48d5m6rtdcm?svg=true)](https://ci.appveyor.com/project/persikfloro/diplomaqa)
 ## Документация
 * [Текст задания](https://github.com/netology-code/qa-diploma/blob/master/README.md)
 * [План автоматизации](Plan.md)
