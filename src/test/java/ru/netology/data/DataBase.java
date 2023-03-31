@@ -1,5 +1,6 @@
 package ru.netology.data;
 
+
 import lombok.*;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
@@ -12,20 +13,23 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
-public class SQL {
+public class DataBase {
     public static QueryRunner runner = new QueryRunner();
 
     public static String url = System.getProperty("db.url");
-    public static String user = System.getProperty("db.user");
-    public static String password = System.getProperty("db.password");
+    static String appURL = System.getProperty("app.url");
+    static String appPORT = System.getProperty("app.port");
+    static String userDB = System.getProperty("app.userDB");
+    static String password = System.getProperty("app.password");
+
 
     @SneakyThrows
     public static Connection connection() {
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection(url, user, password);
+            conn = DriverManager.getConnection(url, userDB, password);
         } catch (SQLException e) {
-            conn = DriverManager.getConnection(System.getProperty("db.urlpostgresql"), user, password);
+            conn = DriverManager.getConnection(System.getProperty("db.url.postgresql"), userDB, password);
         }
         return conn;
     }
@@ -118,4 +122,5 @@ public class SQL {
         ResultSetHandler<List<OrderEntity>> resultHandler = new BeanListHandler<>(OrderEntity.class);
         return runner.query(connection(), dataSQL, resultHandler);
     }
+
 }

@@ -1,20 +1,17 @@
-package ru.netology.page;
-
+package ru.netology.data;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selectors;
 import com.codeborne.selenide.SelenideElement;
-import ru.netology.data.Helper;
-
 import static com.codeborne.selenide.Selenide.$;
 
 public class PaymentCard {
     private SelenideElement cardTitle = $(Selectors.withText("Оплата по карте"));
-    private SelenideElement buttonContinue = $(Selectors.withText("Продолжить"));
-    private SelenideElement cardNumber = $("[placeholder=\"0000 0000 0000 0000\"]");
-    private SelenideElement cardMonth = $("[placeholder=\"08\"]");
-    private SelenideElement cardYear = $("[placeholder=\"22\"]");
-    private SelenideElement cardOwner = $("div:nth-child(3) span:nth-child(1) span.input__box input");
-    private SelenideElement cardCVC = $("[placeholder=\"999\"]");
+    private static SelenideElement buttonContinue = $(Selectors.withText("Продолжить"));
+    private static SelenideElement cardNumber = $("[placeholder=\"0000 0000 0000 0000\"]");
+    private static SelenideElement cardMonth = $("[placeholder=\"08\"]");
+    private static SelenideElement cardYear = $("[placeholder=\"22\"]");
+    private static SelenideElement cardOwner = $("div:nth-child(3) span:nth-child(1) span.input__box input");
+    private static SelenideElement cardCVC = $("[placeholder=\"999\"]");
 
     public PaymentCard() {
         cardTitle.shouldBe(Condition.visible);
@@ -22,28 +19,28 @@ public class PaymentCard {
 
     // ВАЛИДНЫЕ ДАННЫЕ
 
-    public void validNumber() {
+    public static void validNumber() {
         cardNumber.setValue(Helper.getApprovedNumber());
     }
 
-    public void validOwner() {
-        cardOwner.setValue(Helper.getEnglishOwner());
-    }
-
-    public void validMonth() {
+    public static void validMonth() {
         cardMonth.setValue(Helper.getMonth());
     }
 
-    public void validYear() {
+    public static void validYear() {
         cardYear.setValue(Helper.getYear());
     }
 
+    public static void validOwner() {
+        cardOwner.setValue(Helper.getEnglishOwner());
+    }
 
-    public void validCVC() {
+
+    public static void validCVC() {
         cardCVC.setValue(Helper.getCVC());
     }
 
-    public void approvedNumberCard() {
+    public static void approvedNumberCard() {
         validNumber();
         validMonth();
         validYear();
@@ -54,7 +51,7 @@ public class PaymentCard {
 
     // НЕВАЛИДНЫЕ ДАННЫЕ
     // Номер карты
-    public void declinedNumberCard() {
+    public static void declinedNumberCard() {
         cardNumber.setValue(Helper.getDeclinedNumber());
         validMonth();
         validYear();
@@ -63,7 +60,7 @@ public class PaymentCard {
         buttonContinue.click();
     }
 
-    public void emptyNumber() {
+    public static void emptyNumber() {
         validMonth();
         validYear();
         validOwner();
@@ -71,7 +68,7 @@ public class PaymentCard {
         buttonContinue.click();
     }
 
-    public void randomNumber() {
+    public static void randomNumber() {
         cardNumber.setValue(Helper.getRandomNumber());
         validMonth();
         validYear();
@@ -80,7 +77,7 @@ public class PaymentCard {
         buttonContinue.click();
     }
 
-    public void zeroNumber() {
+    public static void zeroNumber() {
         cardNumber.setValue(Helper.getZeroNumber());
         validMonth();
         validYear();
@@ -89,7 +86,7 @@ public class PaymentCard {
         buttonContinue.click();
     }
 
-    public void randomSingleNumber() {
+    public static void randomSingleNumber() {
         cardNumber.setValue(Helper.getRandomSingleNumber());
         validMonth();
         validYear();
@@ -98,7 +95,7 @@ public class PaymentCard {
         buttonContinue.click();
     }
 
-    public void randomFifteenNumber() {
+    public static void randomFifteenNumber() {
         cardNumber.setValue(Helper.getRandomFifteenNumber());
         validMonth();
         validYear();
@@ -107,7 +104,7 @@ public class PaymentCard {
         buttonContinue.click();
     }
 
-    public void randomSeventeenNumber() {
+    public static void randomSeventeenNumber() {
         cardNumber.setValue(Helper.getRandomSeventeenNumber());
         validMonth();
         validYear();
@@ -116,7 +113,7 @@ public class PaymentCard {
         buttonContinue.click();
     }
 
-    public void englishLettersNumber() {
+    public static void englishLettersNumber() {
         cardNumber.setValue(Helper.getEnglishLettersNumber());
         validMonth();
         validYear();
@@ -125,7 +122,7 @@ public class PaymentCard {
         buttonContinue.click();
     }
 
-    public void cyrillicLettersNumber() {
+    public static void cyrillicLettersNumber() {
         cardNumber.setValue(Helper.getCyrillicLettersNumber());
         validMonth();
         validYear();
@@ -134,7 +131,7 @@ public class PaymentCard {
         buttonContinue.click();
     }
 
-    public void symbolsNumber() {
+    public static void symbolsNumber() {
         cardNumber.setValue(Helper.getSymbolsNumber());
         validMonth();
         validYear();
@@ -144,7 +141,7 @@ public class PaymentCard {
     }
 
     // Владелец
-    public void emptyOwner() {
+    public static void emptyOwner() {
         validNumber();
         validMonth();
         validYear();
@@ -152,16 +149,16 @@ public class PaymentCard {
         buttonContinue.click();
     }
 
-    public void overLimitLettersOwner() {
+    public static void overLimitLettersOwner() {
         validNumber();
         validMonth();
         validYear();
-        cardOwner.setValue(Helper.getOverLimitLettersOwner(String.valueOf(65)));
+        cardOwner.setValue(Helper.getOverLimitLettersOwner(String.valueOf(1000)));
         validCVC();
         buttonContinue.click();
     }
 
-    public void singleWordOwner() {
+    public static void singleWordOwner() {
         validNumber();
         validMonth();
         validYear();
@@ -170,7 +167,7 @@ public class PaymentCard {
         buttonContinue.click();
     }
 
-    public void cyrillicLettersOwner() {
+    public static void cyrillicLettersOwner() {
         validNumber();
         validMonth();
         validYear();
@@ -178,7 +175,7 @@ public class PaymentCard {
         validCVC();
         buttonContinue.click();
     }
-    public void numberOwner() {
+    public static void numberOwner() {
         validNumber();
         validMonth();
         validYear();
@@ -187,7 +184,7 @@ public class PaymentCard {
         buttonContinue.click();
     }
 
-    public void symbolsOwner() {
+    public static void symbolsOwner() {
         validNumber();
         validMonth();
         validYear();
@@ -196,7 +193,7 @@ public class PaymentCard {
         buttonContinue.click();
     }
 
-    public void threeWordOwner(){
+    public static void threeWordOwner(){
         validNumber();
         validMonth();
         validYear();
@@ -207,7 +204,7 @@ public class PaymentCard {
     }
 
     // Месяц
-    public void emptyMonth() {
+    public static void emptyMonth() {
         validNumber();
         validYear();
         validOwner();
@@ -215,7 +212,7 @@ public class PaymentCard {
         buttonContinue.click();
     }
 
-    public void zeroMonth() {
+    public static void zeroMonth() {
         validNumber();
         cardMonth.setValue(Helper.getZeroMonth());
         validYear();
@@ -224,7 +221,7 @@ public class PaymentCard {
         buttonContinue.click();
     }
 
-    public void thirteenthMonth() {
+    public static void thirteenthMonth() {
         validNumber();
         cardMonth.setValue(Helper.getThirteenMonth());
         validYear();
@@ -233,7 +230,7 @@ public class PaymentCard {
         buttonContinue.click();
     }
 
-    public void singleNumberMonth() {
+    public static void singleNumberMonth() {
         validNumber();
         cardMonth.setValue(Helper.getRandomSingleNumberMonth());
         validYear();
@@ -242,7 +239,7 @@ public class PaymentCard {
         buttonContinue.click();
     }
 
-    public void englishLettersNumberMonth(){
+    public static void englishLettersNumberMonth(){
         validNumber();
         cardMonth.setValue(Helper.getEnglishLettersNumberMonth());
         validYear();
@@ -254,7 +251,7 @@ public class PaymentCard {
 
     // Год
 
-    public void emptyYear() {
+    public static void emptyYear() {
         validNumber();
         validMonth();
         validOwner();
@@ -262,7 +259,7 @@ public class PaymentCard {
         buttonContinue.click();
     }
 
-    public void yearMoreThanSix() {
+    public static void yearMoreThanSix() {
         validNumber();
         validMonth();
         cardYear.setValue(Helper.getMoreThanSixYear());
@@ -271,7 +268,7 @@ public class PaymentCard {
         buttonContinue.click();
     }
 
-    public void pastYear() {
+    public static void pastYear() {
         validNumber();
         validMonth();
         cardYear.setValue(Helper.getPastYear());
@@ -280,7 +277,7 @@ public class PaymentCard {
         buttonContinue.click();
     }
 
-    public void zeroYear() {
+    public static void zeroYear() {
         validNumber();
         validMonth();
         cardYear.setValue(Helper.getZeroYear());
@@ -289,7 +286,7 @@ public class PaymentCard {
         buttonContinue.click();
     }
 
-    public void randomSingleYear() {
+    public static void randomSingleYear() {
         validNumber();
         validMonth();
         cardYear.setValue(Helper.getRandomSingleYear());
@@ -298,7 +295,7 @@ public class PaymentCard {
         buttonContinue.click();
     }
 
-    public void lettersYear() {
+    public static void lettersYear() {
         validNumber();
         validMonth();
         cardYear.setValue(Helper.getLettersYear());
@@ -307,7 +304,7 @@ public class PaymentCard {
         buttonContinue.click();
     }
 
-    public void symbolYear() {
+    public static void symbolYear() {
         validNumber();
         validMonth();
         cardYear.setValue(Helper.getSymbolYear());
@@ -319,7 +316,7 @@ public class PaymentCard {
 
     //CVC
 
-    public void zeroCVC() {
+    public static void zeroCVC() {
         validNumber();
         validMonth();
         validYear();
@@ -328,7 +325,7 @@ public class PaymentCard {
         buttonContinue.click();
     }
 
-    public void lettersCVC() {
+    public static void lettersCVC() {
         validNumber();
         validMonth();
         validYear();
@@ -337,7 +334,7 @@ public class PaymentCard {
         buttonContinue.click();
     }
 
-    public void symbolsCVC() {
+    public static void symbolsCVC() {
         validNumber();
         validMonth();
         validYear();
@@ -346,7 +343,7 @@ public class PaymentCard {
         buttonContinue.click();
     }
 
-    public void emptyCVC() {
+    public static void emptyCVC() {
         validNumber();
         validMonth();
         validYear();
@@ -354,7 +351,7 @@ public class PaymentCard {
         buttonContinue.click();
     }
 
-    public void oneSymbolCVC() {
+    public static void oneSymbolCVC() {
         validNumber();
         validMonth();
         validYear();
@@ -363,7 +360,7 @@ public class PaymentCard {
         buttonContinue.click();
     }
 
-    public void twoSymbolCVC() {
+    public static void twoSymbolCVC() {
         validNumber();
         validMonth();
         validYear();
@@ -371,6 +368,4 @@ public class PaymentCard {
         cardCVC.setValue(Helper.getTwoSymbolsCVC());
         buttonContinue.click();
     }
-
-
 }

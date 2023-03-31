@@ -1,25 +1,28 @@
-version: '3.7'
+version: '3'
 services:
   mysql:
-    image: mysql:8.0
+    image: mysql:latest
     ports:
       - '3306:3306'
-    volumes:
-      - ./data:/var/lib/db
     environment:
       - MYSQL_RANDOM_ROOT_PASSWORD=yes
-      - MYSQL_PASSWORD=pass888
+      - MYSQL_DATABASE=app
       - MYSQL_USER=lama888
-      - MYSQL_DATABASE=mysql
-
-  postgresql:
-    image: postgres:14.0
+      - MYSQL_PASSWORD=pass888
+    volumes:
+      - ./data:/var/lib/mysql
+  postgres:
+    image: postgres:latest
     ports:
       - '5432:5432'
     volumes:
-      - ./data:/var/lib/db
+      - ./data:/var/lib/pgsql/data
     environment:
-      - POSTGRES_RANDOM_ROOT_PASSWORD=yes
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=lama888
-      - POSTGRES_PASSWORD=pass888
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - POSTGRES_DB=app
+      - POSTGRES_PASSWORD=lama888
+      - POSTGRES_USER=pass888
+  node-app:
+    build: ./gate-simulator
+    ports:
+      - '9999:9999'

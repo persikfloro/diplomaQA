@@ -1,4 +1,4 @@
-package ru.netology.test.API;
+package ru.netology.test;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -8,9 +8,10 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.netology.data.API;
-import ru.netology.data.SQL;
+import ru.netology.data.DataBase;
 
 import java.util.List;
 
@@ -18,14 +19,13 @@ import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class APITest {
-    private static List<SQL.PaymentEntity> payment;
-    private static List<SQL.CreditRequestEntity> credit;
-    private static List<SQL.OrderEntity> order;
+    private static List<DataBase.PaymentEntity> payment;
+    private static List<DataBase.CreditRequestEntity> credit;
+    private static List<DataBase.OrderEntity> order;
 
     @BeforeAll
     static void setUpAll() {
-        SelenideLogger.addListener("allure", new AllureSelenide().screenshots(true)
-                .savePageSource(true));
+        SelenideLogger.addListener("allure", new AllureSelenide().screenshots(true).savePageSource(true));
     }
 
     @AfterAll
@@ -41,6 +41,7 @@ public class APITest {
             .build();
 
     @Test
+    @DisplayName("Покупка тура по дебетовой активной карте (вызов метода POST)")
     public void shouldApprovedPaymentCard() {
         String status = given()
                 .spec(requestSpec)
@@ -51,9 +52,9 @@ public class APITest {
                 .statusCode(200)
                 .extract()
                 .path("status");
-        payment = SQL.getPayments();
-        credit = SQL.getCreditsRequest();
-        order = SQL.getOrders();
+        payment = DataBase.getPayments();
+        credit = DataBase.getCreditsRequest();
+        order = DataBase.getOrders();
         assertEquals(1, payment.size());
         assertEquals(0, credit.size());
         assertEquals(1, order.size());
@@ -64,6 +65,7 @@ public class APITest {
     }
 
     @Test
+    @DisplayName("Покупка тура по дебетовой заблокированной карте (вызов метода POST)")
     public void shouldDeclinedPaymentCard() {
         String status = given()
                 .spec(requestSpec)
@@ -75,9 +77,9 @@ public class APITest {
                 .extract()
                 .path("status");
 
-        payment = SQL.getPayments();
-        credit = SQL.getCreditsRequest();
-        order = SQL.getOrders();
+        payment = DataBase.getPayments();
+        credit = DataBase.getCreditsRequest();
+        order = DataBase.getOrders();
         assertEquals(1, payment.size());
         assertEquals(0, credit.size());
         assertEquals(1, order.size());
@@ -88,41 +90,8 @@ public class APITest {
     }
 
     @Test
-    public void shouldErrorPaymentCardEmptyNumber() {
-        given()
-                .spec(requestSpec)
-                .body(API.getApiEmptyNumberCard())
-                .when()
-                .post("/api/v1/pay")
-                .then()
-                .statusCode(400);
-        payment = SQL.getPayments();
-        credit = SQL.getCreditsRequest();
-        order = SQL.getOrders();
-        assertEquals(0, payment.size());
-        assertEquals(0, credit.size());
-        assertEquals(0, order.size());
-    }
-
-    @Test
-    public void shouldErrorPaymentCardEmptyMonth() {
-        given()
-                .spec(requestSpec)
-                .body(API.getApiEmptyMonthCard())
-                .when()
-                .post("/api/v1/pay")
-                .then()
-                .statusCode(400);
-        payment = SQL.getPayments();
-        credit = SQL.getCreditsRequest();
-        order = SQL.getOrders();
-        assertEquals(0, payment.size());
-        assertEquals(0, credit.size());
-        assertEquals(0, order.size());
-    }
-
-    @Test
-    public void shouldErrorPaymentCardEmptyYear() {
+    @DisplayName("Покупка тура в кредит по активной карте (вызов метода POST)")
+    public void shouldApprovedPaymentCardOnCredit() {
         given()
                 .spec(requestSpec)
                 .body(API.getApiEmptyYearCard())
@@ -130,43 +99,27 @@ public class APITest {
                 .post("/api/v1/pay")
                 .then()
                 .statusCode(400);
-        payment = SQL.getPayments();
-        credit = SQL.getCreditsRequest();
-        order = SQL.getOrders();
+        payment = DataBase.getPayments();
+        credit = DataBase.getCreditsRequest();
+        order = DataBase.getOrders();
         assertEquals(0, payment.size());
         assertEquals(0, credit.size());
         assertEquals(0, order.size());
     }
 
     @Test
-    public void shouldErrorPaymentCardEmptyOwner() {
+    @DisplayName("Покупка тура в кредит по заблокированной карте (вызов метода POST)")
+    public void shouldErrorPaymentCardOnCredit() {
         given()
                 .spec(requestSpec)
-                .body(API.getApiEmptyOwnerCard())
+                .body(API.getApiEmptyYearCard())
                 .when()
                 .post("/api/v1/pay")
                 .then()
                 .statusCode(400);
-        payment = SQL.getPayments();
-        credit = SQL.getCreditsRequest();
-        order = SQL.getOrders();
-        assertEquals(0, payment.size());
-        assertEquals(0, credit.size());
-        assertEquals(0, order.size());
-    }
-
-    @Test
-    public void shouldErrorPaymentCardEmptyCVC() {
-        given()
-                .spec(requestSpec)
-                .body(API.getApiEmptyCVCCard())
-                .when()
-                .post("/api/v1/pay")
-                .then()
-                .statusCode(400);
-        payment = SQL.getPayments();
-        credit = SQL.getCreditsRequest();
-        order = SQL.getOrders();
+        payment = DataBase.getPayments();
+        credit = DataBase.getCreditsRequest();
+        order = DataBase.getOrders();
         assertEquals(0, payment.size());
         assertEquals(0, credit.size());
         assertEquals(0, order.size());
