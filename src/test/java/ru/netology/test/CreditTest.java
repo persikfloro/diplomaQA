@@ -47,7 +47,7 @@ public class CreditTest {
     @DisplayName("Покупка тура в кредит по данным активной карты")
     public void shouldSuccessfulPaymentApprovedCardInCredit() {
         PaymentPage.buyingOnCredit();
-        PaymentCard.validNumber();
+        PaymentCard.approvedNumberCard();
         PaymentPage.messageSuccess();
     }
 
@@ -120,11 +120,11 @@ public class CreditTest {
     public void shouldErrorEmptyNumberCredit() {
         PaymentPage.buyingOnCredit();
         PaymentCard.emptyNumber();
-        PaymentPage.messageRequiredField();
+        PaymentPage.messageInvalidFormat();
     }
 
     @Test
-    @DisplayName("Ввод двух нулей в поле Месяц  при покупке тура в кредит")
+    @DisplayName("Ввод двух нулей в поле Месяц при покупке тура в кредит")
     public void shouldErrorZeroMonthCredit() {
         PaymentPage.buyingOnCredit();
         PaymentCard.zeroMonth();
@@ -136,7 +136,7 @@ public class CreditTest {
     public void shouldErrorIfNotExistedMonth13Credit() {
         PaymentPage.buyingOnCredit();
         PaymentCard.thirteenthMonth();
-        PaymentPage.messageInvalidFormat();
+        PaymentPage.messageInvalidDate();
     }
 
     @Test
@@ -160,7 +160,7 @@ public class CreditTest {
     public void shouldErrorEmptyMonthCredit() {
         PaymentPage.buyingOnCredit();
         PaymentCard.emptyMonth();
-        PaymentPage.messageRequiredField();
+        PaymentPage.messageInvalidFormat();
     }
 
     @Test
@@ -200,7 +200,7 @@ public class CreditTest {
     public void shouldErrorEmptyYearCredit() {
         PaymentPage.buyingOnCredit();
         PaymentCard.emptyYear();
-        PaymentPage.messageRequiredField();
+        PaymentPage.messageInvalidFormat();
     }
 
     @Test
@@ -232,7 +232,7 @@ public class CreditTest {
     public void shouldErrorIfCyrillicLettersCredit() {
         PaymentPage.buyingOnCredit();
         PaymentCard.cyrillicLettersOwner();
-        PaymentPage.messageInvalidFormat();
+        PaymentPage.messageError();
     }
 
     @Test
@@ -240,7 +240,7 @@ public class CreditTest {
     public void shouldErrorNumberOwnerCredit() {
         PaymentPage.buyingOnCredit();
         PaymentCard.numberOwner();
-        PaymentPage.messageInvalidFormat();
+        PaymentPage.messageError();
     }
 
     @Test
@@ -248,7 +248,7 @@ public class CreditTest {
     public void shouldErrorIfSymbolsOwnerCredit() {
         PaymentPage.buyingOnCredit();
         PaymentCard.symbolsOwner();
-        PaymentPage.messageInvalidFormat();
+        PaymentPage.messageError();
     }
 
     @Test
@@ -272,7 +272,7 @@ public class CreditTest {
     public void shouldErrorOneSymbolCVCCredit() {
         PaymentPage.buyingOnCredit();
         PaymentCard.validNumber();
-        PaymentPage.messageSuccess();
+        PaymentPage.messageInvalidFormat();
     }
 
     @Test

@@ -153,7 +153,7 @@ public class PaymentCard {
         validNumber();
         validMonth();
         validYear();
-        cardOwner.setValue(Helper.getOverLimitLettersOwner(String.valueOf(1000)));
+        cardOwner.setValue(Helper.getOverLimitLettersOwner());
         validCVC();
         buttonContinue.click();
     }

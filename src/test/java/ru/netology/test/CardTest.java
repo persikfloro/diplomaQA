@@ -1,17 +1,11 @@
 package ru.netology.test;
-
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import ru.netology.data.DataBase;
-import ru.netology.data.Helper;
 import ru.netology.data.PaymentCard;
 import ru.netology.data.PaymentPage;
-
-import java.time.Duration;
 import static com.codeborne.selenide.Selenide.open;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CardTest {
     @BeforeEach
@@ -36,16 +30,6 @@ public class CardTest {
     @AfterEach
     void clear() {
         DataBase.clear();
-    }
-
-    long numberFromPayment() {
-        DataBase database= new DataBase();
-        return database.getNumberPaymentCard();
-    }
-
-    String statusAfterServer() {
-        DataBase database= new DataBase();
-        return database.getStatusPaymentCard();
     }
 
     @Test
@@ -111,7 +95,7 @@ public class CardTest {
     public void shouldErrorCyrillicLettersNumber() {
         PaymentPage.purchaseByCard();
         PaymentCard.cyrillicLettersNumber();
-        PaymentPage.messageRequiredField();
+        PaymentPage.messageInvalidFormat();
     }
 
     @Test
@@ -119,7 +103,7 @@ public class CardTest {
     public void shouldErrorEnglishLettersNumber() {
         PaymentPage.purchaseByCard();
         PaymentCard.englishLettersNumber();
-        PaymentPage.messageRequiredField();
+        PaymentPage.messageInvalidFormat();
     }
 
     @Test
@@ -127,7 +111,7 @@ public class CardTest {
     public void shouldErrorSymbolsNumber() {
         PaymentPage.purchaseByCard();
         PaymentCard.symbolsNumber();
-        PaymentPage.messageRequiredField();
+        PaymentPage.messageInvalidFormat();
     }
 
     @Test
@@ -135,7 +119,7 @@ public class CardTest {
     public void shouldErrorEmptyNumber() {
         PaymentPage.purchaseByCard();
         PaymentCard.emptyNumber();
-        PaymentPage.messageRequiredField();
+        PaymentPage.messageInvalidFormat();
     }
 
     /* Ввод невалидных данных в поле Месяц
@@ -177,7 +161,7 @@ public class CardTest {
     public void shouldErrorEmptyMonth() {
         PaymentPage.purchaseByCard();
         PaymentCard.emptyMonth();
-        PaymentPage.messageRequiredField();
+        PaymentPage.messageInvalidFormat();
     }
 
     // 7. Ввод невалидных данных в поле Год
@@ -187,7 +171,7 @@ public class CardTest {
     public void shouldErrorEmptyYear() {
         PaymentPage.purchaseByCard();
         PaymentCard.emptyYear();
-        PaymentPage.messageRequiredField();
+        PaymentPage.messageInvalidFormat();
     }
 
     @Test
@@ -203,7 +187,7 @@ public class CardTest {
     public void shouldErrorIfYearMoreThan6() {
         PaymentPage.purchaseByCard();
         PaymentCard.yearMoreThanSix();
-        PaymentPage.messageValidity();
+        PaymentPage.messageInvalidDate();
     }
 
     @Test
@@ -252,7 +236,7 @@ public class CardTest {
     public void shouldErrorIfSymbolsOwner() {
         PaymentPage.purchaseByCard();
         PaymentCard.symbolsOwner();
-        PaymentPage.messageInvalidFormat();
+        PaymentPage.messageError();
     }
 
     @Test
@@ -260,7 +244,7 @@ public class CardTest {
     public void shouldErrorNumberOwner() {
         PaymentPage.purchaseByCard();
         PaymentCard.numberOwner();
-        PaymentPage.messageInvalidFormat();
+        PaymentPage.messageError();
     }
 
     @Test

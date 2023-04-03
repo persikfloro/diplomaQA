@@ -9,30 +9,15 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class PaymentPage {
     public Status status;
-    static String url = System.getProperty("db.url");
-    static String appURL = System.getProperty("app.url");
-    static String appPORT = System.getProperty("app.port");
-    static String userDB = System.getProperty("app.userDB");
-    static String password = System.getProperty("app.password");
-
-    List<SelenideElement> input = $$(".input__control");
-    SelenideElement cardNumber = input.get(0);
-    SelenideElement cardMonth = input.get(1);
-    SelenideElement cardYear = input.get(2);
-    SelenideElement cardOwner = input.get(3);
-    SelenideElement cvc = input.get(4);
-
     private final SelenideElement buttonPay = $(Selectors.withText("Купить"));
     private final SelenideElement buttonPayCredit = $(Selectors.withText("Купить в кредит"));
 
     public static void purchaseByCard() {
-        open(appURL + ":" + appPORT);
         $$(".button__content").find(exactText("Купить")).click();
         $$(".heading_theme_alfa-on-white").find(exactText("Оплата по карте")).shouldBe(visible);
     }
 
     public static void buyingOnCredit() {
-        open(appURL + ":" + appPORT);
         $$(".button__content").find(exactText("Купить в кредит")).click();
         $$(".heading_theme_alfa-on-white").find(exactText("Кредит по данным карты")).shouldBe(visible);
     }
