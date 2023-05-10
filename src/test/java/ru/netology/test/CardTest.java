@@ -2,66 +2,62 @@ package ru.netology.test;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
-import ru.netology.data.DataBase;
-import ru.netology.data.PaymentCard;
-import ru.netology.data.PaymentPage;
-import static com.codeborne.selenide.Selenide.open;
+import ru.netology.data.Helper;
+import ru.netology.data.SQL;
+import ru.netology.data.Status;
+import ru.netology.pages.PaymentPage;
+import java.sql.SQLException;
 
 public class CardTest {
+    private PaymentPage paymentPage;
     @BeforeEach
     void setUpPage() {
-        PaymentPage paymentPage = new PaymentPage();
+        paymentPage = new PaymentPage();
     }
     @BeforeAll
     static void setup() {
         SelenideLogger.addListener("allure", new AllureSelenide());
     }
-
     @AfterAll
     static void tearDown() {
         SelenideLogger.removeListener("allure");
     }
-
-    @BeforeEach
-    void openSetup() {
-        open("http://localhost:8080");
-    }
-
     @AfterEach
-    void clear() {
-        DataBase.clear();
+    void clear() throws SQLException {
+        SQL.clear();
     }
-
     @Test
     @DisplayName("Покупка тура по дебетовой активной карте")
-    public void shouldSuccessfulPaymentApprovedCard() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.approvedNumberCard();
-        PaymentPage.messageSuccess();
+    void shouldSuccessfulPaymentApprovedCard() throws SQLException {
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageSuccess();
     }
-
     @Test
     @DisplayName("Покупка тура по дебетовой заблокированной карте")
     public void shouldUnsuccessfulPaymentDeclinedCard() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.declinedNumberCard();
-        PaymentPage.messageError();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.getDeclinedNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageError();
     }
-
     @Test
     @DisplayName("Покупка тура по дебетовой несуществующей карте")
     public void shouldErrorRandomNumber() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.randomNumber();
-        PaymentPage.messageError();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.getRandomNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageError();
     }
 
     @Test
     @DisplayName("Покупка тура по дебетовой карте 0000 0000 0000 0000")
     public void shouldErrorZeroNumber() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.zeroNumber();
-        PaymentPage.messageError();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.getZeroNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageError();
     }
 
     // Ввод невалидных данных в поле Номер карты
@@ -69,57 +65,64 @@ public class CardTest {
     @Test
     @DisplayName("Оплата картой с номером из одной цифры")
     public void shouldErrorSingleNumber() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.randomSingleNumber();
-        PaymentPage.messageInvalidFormat();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.getRandomDigit(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageInvalidFormat();
     }
 
     @Test
     @DisplayName("Оплата тура с 15-значным номером карты")
     public void shouldErrorFifteenNumber() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.randomFifteenNumber();
-        PaymentPage.messageInvalidFormat();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.getRandomFifteenNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageInvalidFormat();
     }
 
     @Test
     @DisplayName("Оплата тура с 17-значным номером карты")
     public void shouldErrorSeventeenNumber() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.randomSeventeenNumber();
-        PaymentPage.messageError();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.getRandomSeventeenNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageError();
     }
 
     @Test
     @DisplayName("Оплата картой с буквами на кириллице в номере")
     public void shouldErrorCyrillicLettersNumber() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.cyrillicLettersNumber();
-        PaymentPage.messageInvalidFormat();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.getCyrillicLettersNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageInvalidFormat();
     }
 
     @Test
     @DisplayName("Оплата картой с буквами на латинице в номере")
     public void shouldErrorEnglishLettersNumber() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.englishLettersNumber();
-        PaymentPage.messageInvalidFormat();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.getEnglishLettersNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageInvalidFormat();
     }
 
     @Test
     @DisplayName("Оплата картой со спецсимволами в номере")
     public void shouldErrorSymbolsNumber() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.symbolsNumber();
-        PaymentPage.messageInvalidFormat();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.getSymbolsNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageInvalidFormat();
     }
 
     @Test
     @DisplayName("Оплата картой с пустым номером")
     public void shouldErrorEmptyNumber() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.emptyNumber();
-        PaymentPage.messageInvalidFormat();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.getEmpty(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageInvalidFormat();
     }
 
     /* Ввод невалидных данных в поле Месяц
@@ -127,41 +130,46 @@ public class CardTest {
     @Test
     @DisplayName("Ввести два ноля в поле Месяц")
     public void shouldErrorZeroMonth() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.zeroMonth();
-        PaymentPage.messageInvalidDate();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getTwoZero(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageInvalidDate();
     }
 
     @Test
     @DisplayName("Ввести 13 в поле Месяц")
     public void shouldErrorIfNotExistedMonth13() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.thirteenthMonth();
-        PaymentPage.messageInvalidDate();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getThirteenMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageInvalidDate();
     }
 
     @Test
     @DisplayName("Ввести в поле Месяц буквы на латинице")
     public void shouldErrorIfInvalidMonthFormat() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.englishLettersNumberMonth();
-        PaymentPage.messageInvalidFormat();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getTwoLetters(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageInvalidFormat();
     }
 
     @Test
     @DisplayName("Ввести в поле Месяц одну цифру")
     public void shouldErrorIfInvalidNumberMonth() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.singleNumberMonth();
-        PaymentPage.messageInvalidFormat();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getRandomDigit(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageInvalidFormat();
     }
 
     @Test
     @DisplayName("Оставить поле Месяц пустым")
     public void shouldErrorEmptyMonth() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.emptyMonth();
-        PaymentPage.messageInvalidFormat();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getEmpty(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageInvalidFormat();
     }
 
     // 7. Ввод невалидных данных в поле Год
@@ -169,154 +177,193 @@ public class CardTest {
     @Test
     @DisplayName("Оставить поле Год пустым")
     public void shouldErrorEmptyYear() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.emptyYear();
-        PaymentPage.messageInvalidFormat();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getEmpty(), Helper.getOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageInvalidFormat();
     }
 
     @Test
     @DisplayName("Ввести год из одной цифры")
     public void shouldErrorRandomSingleYear() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.randomSingleYear();
-        PaymentPage.messageInvalidFormat();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getRandomDigit(), Helper.getOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageInvalidFormat();
     }
 
     @Test
-    @DisplayName("Год старше текущего на шесть лет")
-    public void shouldErrorIfYearMoreThan6() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.yearMoreThanSix();
-        PaymentPage.messageInvalidDate();
+    @DisplayName("Год старше текущего на пять лет")
+    public void shouldErrorIfYearMoreThanFive() {
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getMoreThanFiveYear(), Helper.getOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageInvalidDate();
     }
 
     @Test
     @DisplayName("Нулевой год")
     public void shouldErrorZeroYear() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.zeroYear();
-        PaymentPage.messageValidity();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getTwoZero(), Helper.getOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageValidity();
     }
 
     @Test
     @DisplayName("Год из букв")
     public void shouldErrorLetterYear() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.lettersYear();
-        PaymentPage.messageInvalidFormat();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getTwoLetters(), Helper.getOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageInvalidFormat();
     }
 
     @Test
     @DisplayName("Год из специальных символов")
     public void shouldErrorSymbolsYear() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.symbolYear();
-        PaymentPage.messageInvalidFormat();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getSymbolYear(), Helper.getOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageInvalidFormat();
     }
 
     // Ввод невалидных данных в поле Владелец
     @Test
     @DisplayName("Оставить поле Владелец пустым")
     public void shouldErrorIfEmptyOwnerField() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.emptyOwner();
-        PaymentPage.messageRequiredField();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getEmpty(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageRequiredField();
     }
 
     @Test
     @DisplayName("Фамилия и имя на кириллице")
     public void shouldErrorIfCyrillicLetters() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.cyrillicLettersOwner();
-        PaymentPage.messageInvalidFormat();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getCyrillicOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageInvalidFormat();
     }
 
     @Test
     @DisplayName("Ввод специальных символов в поле Владелец")
     public void shouldErrorIfSymbolsOwner() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.symbolsOwner();
-        PaymentPage.messageError();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getSymbolOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageError();
     }
 
     @Test
     @DisplayName("Ввод чисел в поле Владелец")
     public void shouldErrorNumberOwner() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.numberOwner();
-        PaymentPage.messageError();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getNumbersOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageError();
     }
 
     @Test
     @DisplayName("Ввод 1000 символов в поле Владелец")
     public void shouldErrorIfOwnerOverLimit() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.overLimitLettersOwner();
-        PaymentPage.messageInvalidFormat();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOverLimitLettersOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageInvalidFormat();
     }
 
     @Test
     @DisplayName("Ввод одного имени в поле Владелец")
     public void shouldErrorSingleWordOwner() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.singleWordOwner();
-        PaymentPage.messageInvalidFormat();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getSingleWordOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageInvalidFormat();
     }
 
     @Test
     @DisplayName("Ввод трех имён в поле Владелец")
     public void shouldErrorThreeWordOwner() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.threeWordOwner();
-        PaymentPage.messageInvalidFormat();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getThreeWordOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageInvalidFormat();
     }
 
     // Ввод невалидных данных в поле CVV
     @Test
     @DisplayName("Оставить поле CVC пустым")
     public void shouldErrorIfEmptyCVCField() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.emptyCVC();
-        PaymentPage.messageRequiredField();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getEmpty());
+        paymentPage.pushСontinue();
+        paymentPage.messageRequiredField();
     }
 
     @Test
     @DisplayName("Ввод в поле CVC одной цифры")
     public void shouldErrorOneSymbolCVC() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.oneSymbolCVC();
-        PaymentPage.messageInvalidFormat();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getRandomDigit());
+        paymentPage.pushСontinue();
+        paymentPage.messageInvalidFormat();
     }
 
     @Test
     @DisplayName("Ввод в поле CVC двух цифр")
     public void shouldErrorTwoSymbolCVC() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.twoSymbolCVC();
-        PaymentPage.messageInvalidFormat();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getTwoSymbolsCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageInvalidFormat();
     }
 
     @Test
     @DisplayName("Ввод в поле CVC из трёх нулей")
     public void shouldErrorZeroCVC() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.zeroCVC();
-        PaymentPage.messageInvalidFormat();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getZeroCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageInvalidFormat();
     }
 
     @Test
     @DisplayName("Ввод в поле CVC букв")
     public void shouldErrorLetterCVC() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.lettersCVC();
-        PaymentPage.messageInvalidFormat();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getLettersCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageInvalidFormat();
     }
 
     @Test
     @DisplayName("Ввод в поле CVC специальных символов")
     public void shouldErrorSymbolsCVC() {
-        PaymentPage.purchaseByCard();
-        PaymentCard.symbolsCVC();
-        PaymentPage.messageInvalidFormat();
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getSymbolCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageInvalidFormat();
+    }
+
+    @Test
+    @DisplayName("Покупка тура по дебетовой активной карте и проверка записи в базе данных")
+    void shouldPayByApprovedCardStatusInDB() throws SQLException {
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageSuccess();
+        SQL.checkPaymentStatus(Status.APPROVED);
+    }
+
+    @Test
+    @DisplayName("Покупка тура по дебетовой заблокированной карте и проверка записи в базе данных")
+    void shouldNoPayByDeclinedCardStatusInDB() throws SQLException {
+        paymentPage.payByCard();
+        paymentPage.setCardDetails(Helper.getDeclinedNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
+        paymentPage.pushСontinue();
+        paymentPage.messageError();
+        SQL.checkPaymentStatus(Status.DECLINED);
     }
 }

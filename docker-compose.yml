@@ -16,9 +16,9 @@ services:
     ports:
       - '5432:5432'
     environment:
-      - POSTGRES_DB=postgre
-      - POSTGRES_PASSWORD=user
-      - POSTGRES_USER=pass
+      - POSTGRES_DB=postgresql
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_USER=user
     volumes:
       - /var/lib/postgresql/data
   node-app:
