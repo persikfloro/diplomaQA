@@ -31,7 +31,7 @@ public class CreditTest {
     public void shouldSuccessfulPaymentApprovedCardInCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageSuccess();
     }
     @Test
@@ -39,7 +39,7 @@ public class CreditTest {
     public void shouldUnsuccessfulPaymentDeclinedCardInCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.getDeclinedNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageError();
     }
 
@@ -48,7 +48,7 @@ public class CreditTest {
     public void shouldUnsuccessfulPaymentRandomCardInCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.getRandomNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageError();
     }
 
@@ -57,7 +57,7 @@ public class CreditTest {
     public void shouldErrorSingleNumberCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.getRandomDigit(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -66,7 +66,7 @@ public class CreditTest {
     public void shouldErrorFifteenNumberCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.getRandomFifteenNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -75,7 +75,7 @@ public class CreditTest {
     public void shouldErrorSeventeenNumberCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.getRandomSeventeenNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageError();
     }
 
@@ -84,7 +84,7 @@ public class CreditTest {
     public void shouldErrorCyrillicLettersNumberCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.getCyrillicLettersNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -93,7 +93,7 @@ public class CreditTest {
     public void shouldErrorEnglishLettersNumberCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.getEnglishLettersNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -102,7 +102,7 @@ public class CreditTest {
     public void shouldErrorSymbolsNumberCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.getSymbolsNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -111,7 +111,7 @@ public class CreditTest {
     public void shouldErrorEmptyNumberCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.getEmpty(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -120,7 +120,7 @@ public class CreditTest {
     public void shouldErrorZeroMonthCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getTwoZero(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -129,7 +129,7 @@ public class CreditTest {
     public void shouldErrorIfNotExistedMonth13Credit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getThirteenMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidDate();
     }
 
@@ -138,7 +138,7 @@ public class CreditTest {
     public void shouldErrorIfInvalidMonthFormatCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getTwoLetters(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -147,7 +147,7 @@ public class CreditTest {
     public void shouldErrorIfInvalidNumberMonthCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getRandomDigit(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -156,7 +156,7 @@ public class CreditTest {
     public void shouldErrorEmptyMonthCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -165,7 +165,7 @@ public class CreditTest {
     public void shouldErrorZeroYearCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getTwoZero(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageValidity();
     }
 
@@ -174,7 +174,7 @@ public class CreditTest {
     public void shouldErrorIfYearMoreThan6Credit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getPastYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageValidity();
     }
 
@@ -183,7 +183,7 @@ public class CreditTest {
     public void shouldErrorLetterYearCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getTwoLetters(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -192,7 +192,7 @@ public class CreditTest {
     public void shouldErrorRandomSingleYearCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getRandomDigit(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -201,7 +201,7 @@ public class CreditTest {
     public void shouldErrorEmptyYearCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getEmpty(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -210,7 +210,7 @@ public class CreditTest {
     public void shouldErrorSymbolsYearCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getSymbolYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -219,7 +219,7 @@ public class CreditTest {
     public void shouldErrorSingleWordOwnerCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getSingleWordOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -228,7 +228,7 @@ public class CreditTest {
     public void shouldErrorThreeWordOwnerCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getThreeWordOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -237,7 +237,7 @@ public class CreditTest {
     public void shouldErrorIfCyrillicLettersCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getCyrillicOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageError();
     }
 
@@ -246,7 +246,7 @@ public class CreditTest {
     public void shouldErrorNumberOwnerCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getNumbersOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageError();
     }
 
@@ -255,7 +255,7 @@ public class CreditTest {
     public void shouldErrorIfSymbolsOwnerCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getSymbolOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageError();
     }
 
@@ -264,7 +264,7 @@ public class CreditTest {
     public void shouldErrorIfEmptyOwnerFieldCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getEmpty(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageRequiredField();
     }
 
@@ -273,7 +273,7 @@ public class CreditTest {
     public void shouldErrorIfOwnerOverLimitCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOverLimitLettersOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -282,7 +282,7 @@ public class CreditTest {
     public void shouldErrorOneSymbolCVCCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getRandomDigit());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -291,7 +291,7 @@ public class CreditTest {
     public void shouldErrorTwoSymbolCVCCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getTwoSymbolsCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -300,7 +300,7 @@ public class CreditTest {
     public void shouldErrorZeroCVCCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getZeroCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -309,7 +309,7 @@ public class CreditTest {
     public void shouldErrorLetterCVCCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getLettersCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -318,7 +318,7 @@ public class CreditTest {
     public void shouldErrorSymbolsCVCCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getSymbolCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -327,7 +327,7 @@ public class CreditTest {
     public void shouldErrorIfEmptyCVCFieldCredit() {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getEmpty());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageRequiredField();
     }
 
@@ -336,8 +336,9 @@ public class CreditTest {
     void shouldApprovedStatusInDataBaseByPaymentApprovedCardInCredit() throws SQLException {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
-        paymentPage.messageSuccess();
+        paymentPage.pushContinue();
+        paymentPage.messageSendingRequest();
+        paymentPage.messageApprove();
         SQL.checkCreditStatus(Status.APPROVED);
     }
 
@@ -346,8 +347,9 @@ public class CreditTest {
     void shouldDeclinedStatusInDataBaseByPaymentDeclinedCardInCredit() throws SQLException {
         paymentPage.buyInCredit();
         paymentPage.setCardDetails(Helper.getDeclinedNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
-        paymentPage.messageError();
+        paymentPage.pushContinue();
+        paymentPage.messageSendingRequest();
+        paymentPage.messageDecline();
         SQL.checkCreditStatus(Status.DECLINED);
     }
 }

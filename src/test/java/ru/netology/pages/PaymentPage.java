@@ -1,6 +1,5 @@
 package ru.netology.pages;
 
-import com.codeborne.selenide.Selectors;
 import com.codeborne.selenide.SelenideElement;
 
 import java.time.Duration;
@@ -15,6 +14,7 @@ public class PaymentPage {
     private static String url = System.getProperty("db.url");
     private static String user = System.getProperty("db.user");
     private static String password = System.getProperty("db.password");
+
 
     List<SelenideElement> input = $$(".input__control");
     SelenideElement cardNumber = input.get(0);
@@ -34,7 +34,6 @@ public class PaymentPage {
         $$(".button__content").find(exactText("Купить в кредит")).click();
         $$(".heading_theme_alfa-on-white").find(exactText("Кредит по данным карты")).shouldBe(visible);
     }
-    public SelenideElement buttonPayCredit = $(Selectors.withText("Купить в кредит"));
 
     public static void messageSuccess() {
         $$(".notification__title").find(exactText("Успешно")).shouldHave(visible, Duration.ofSeconds(15));
@@ -72,7 +71,7 @@ public class PaymentPage {
         $$(".input__sub").find(exactText("Ошибка! Банк отказал в проведении операции.")).shouldBe(visible);
     }
 
-    public void setCardDetails(String number, String cardMonth, String cardYear, String owner, String CVC){
+    public void setCardDetails(String number, String cardMonth, String cardYear, String owner, String CVC) {
         cardNumber.setValue(number);
         month.setValue(cardMonth);
         year.setValue(cardYear);
@@ -80,7 +79,7 @@ public class PaymentPage {
         cvc.setValue(CVC);
     }
 
-    public void pushСontinue() {
+    public void pushContinue() {
         $$(".button__content").find(exactText("Продолжить")).click();
     }
 

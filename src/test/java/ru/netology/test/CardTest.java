@@ -31,7 +31,7 @@ public class CardTest {
     void shouldSuccessfulPaymentApprovedCard() throws SQLException {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageSuccess();
     }
     @Test
@@ -39,7 +39,7 @@ public class CardTest {
     public void shouldUnsuccessfulPaymentDeclinedCard() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.getDeclinedNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageError();
     }
     @Test
@@ -47,7 +47,7 @@ public class CardTest {
     public void shouldErrorRandomNumber() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.getRandomNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageError();
     }
 
@@ -56,7 +56,7 @@ public class CardTest {
     public void shouldErrorZeroNumber() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.getZeroNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageError();
     }
 
@@ -67,7 +67,7 @@ public class CardTest {
     public void shouldErrorSingleNumber() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.getRandomDigit(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -76,7 +76,7 @@ public class CardTest {
     public void shouldErrorFifteenNumber() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.getRandomFifteenNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -85,7 +85,7 @@ public class CardTest {
     public void shouldErrorSeventeenNumber() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.getRandomSeventeenNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageError();
     }
 
@@ -94,7 +94,7 @@ public class CardTest {
     public void shouldErrorCyrillicLettersNumber() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.getCyrillicLettersNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -103,7 +103,7 @@ public class CardTest {
     public void shouldErrorEnglishLettersNumber() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.getEnglishLettersNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -112,7 +112,7 @@ public class CardTest {
     public void shouldErrorSymbolsNumber() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.getSymbolsNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -121,7 +121,7 @@ public class CardTest {
     public void shouldErrorEmptyNumber() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.getEmpty(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -132,7 +132,7 @@ public class CardTest {
     public void shouldErrorZeroMonth() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getTwoZero(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidDate();
     }
 
@@ -141,7 +141,7 @@ public class CardTest {
     public void shouldErrorIfNotExistedMonth13() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getThirteenMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidDate();
     }
 
@@ -150,7 +150,7 @@ public class CardTest {
     public void shouldErrorIfInvalidMonthFormat() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getTwoLetters(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -159,7 +159,7 @@ public class CardTest {
     public void shouldErrorIfInvalidNumberMonth() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getRandomDigit(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -168,7 +168,7 @@ public class CardTest {
     public void shouldErrorEmptyMonth() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getEmpty(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -179,7 +179,7 @@ public class CardTest {
     public void shouldErrorEmptyYear() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getEmpty(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -188,7 +188,7 @@ public class CardTest {
     public void shouldErrorRandomSingleYear() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getRandomDigit(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -197,7 +197,7 @@ public class CardTest {
     public void shouldErrorIfYearMoreThanFive() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getMoreThanFiveYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidDate();
     }
 
@@ -206,7 +206,7 @@ public class CardTest {
     public void shouldErrorZeroYear() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getTwoZero(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageValidity();
     }
 
@@ -215,7 +215,7 @@ public class CardTest {
     public void shouldErrorLetterYear() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getTwoLetters(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -224,7 +224,7 @@ public class CardTest {
     public void shouldErrorSymbolsYear() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getSymbolYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -234,7 +234,7 @@ public class CardTest {
     public void shouldErrorIfEmptyOwnerField() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getEmpty(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageRequiredField();
     }
 
@@ -243,7 +243,7 @@ public class CardTest {
     public void shouldErrorIfCyrillicLetters() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getCyrillicOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -252,7 +252,7 @@ public class CardTest {
     public void shouldErrorIfSymbolsOwner() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getSymbolOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageError();
     }
 
@@ -261,7 +261,7 @@ public class CardTest {
     public void shouldErrorNumberOwner() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getNumbersOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageError();
     }
 
@@ -270,7 +270,7 @@ public class CardTest {
     public void shouldErrorIfOwnerOverLimit() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOverLimitLettersOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -279,7 +279,7 @@ public class CardTest {
     public void shouldErrorSingleWordOwner() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getSingleWordOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -288,7 +288,7 @@ public class CardTest {
     public void shouldErrorThreeWordOwner() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getThreeWordOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -298,7 +298,7 @@ public class CardTest {
     public void shouldErrorIfEmptyCVCField() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getEmpty());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageRequiredField();
     }
 
@@ -307,7 +307,7 @@ public class CardTest {
     public void shouldErrorOneSymbolCVC() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getRandomDigit());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -316,7 +316,7 @@ public class CardTest {
     public void shouldErrorTwoSymbolCVC() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getTwoSymbolsCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -325,7 +325,7 @@ public class CardTest {
     public void shouldErrorZeroCVC() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getZeroCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -334,7 +334,7 @@ public class CardTest {
     public void shouldErrorLetterCVC() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getLettersCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -343,7 +343,7 @@ public class CardTest {
     public void shouldErrorSymbolsCVC() {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getSymbolCVC());
-        paymentPage.pushСontinue();
+        paymentPage.pushContinue();
         paymentPage.messageInvalidFormat();
     }
 
@@ -352,8 +352,9 @@ public class CardTest {
     void shouldPayByApprovedCardStatusInDB() throws SQLException {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.approvedCardNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
-        paymentPage.messageSuccess();
+        paymentPage.pushContinue();
+        paymentPage.messageSendingRequest();
+        paymentPage.messageApprove();
         SQL.checkPaymentStatus(Status.APPROVED);
     }
 
@@ -362,8 +363,9 @@ public class CardTest {
     void shouldNoPayByDeclinedCardStatusInDB() throws SQLException {
         paymentPage.payByCard();
         paymentPage.setCardDetails(Helper.getDeclinedNumber(), Helper.getMonth(), Helper.getYear(), Helper.getOwner(), Helper.getCVC());
-        paymentPage.pushСontinue();
-        paymentPage.messageError();
+        paymentPage.pushContinue();
+        paymentPage.messageSendingRequest();
+        paymentPage.messageDecline();
         SQL.checkPaymentStatus(Status.DECLINED);
     }
 }
