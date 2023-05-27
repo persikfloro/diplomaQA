@@ -11,9 +11,9 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class PaymentPage {
 
-    private static String url = System.getProperty("db.url");
-    private static String user = System.getProperty("db.user");
-    private static String password = System.getProperty("db.password");
+    private String url = System.getProperty("dbUrl");
+    private String user = System.getProperty("dbUser");
+    private String password = System.getProperty("ddPassword");
 
 
     List<SelenideElement> input = $$(".input__control");
@@ -35,41 +35,39 @@ public class PaymentPage {
         $$(".heading_theme_alfa-on-white").find(exactText("Кредит по данным карты")).shouldBe(visible);
     }
 
-    public static void messageSuccess() {
+    public void messageSuccess() {
         $$(".notification__title").find(exactText("Успешно")).shouldHave(visible, Duration.ofSeconds(15));
     }
 
-    public static void messageError() {
+    public void messageError() {
         $$(".notification__title").find(exactText("Ошибка")).shouldHave(visible, Duration.ofSeconds(15));
     }
 
-    public static void messageInvalidFormat() {
+    public void messageInvalidFormat() {
         $$(".input__sub").find(exactText("Неверный формат")).shouldBe(visible);
     }
 
-    public static void messageInvalidDate() {
+    public void messageInvalidDate() {
         $$(".input__sub").find(exactText("Неверно указан срок действия карты")).shouldBe(visible);
     }
 
-    public static void messageValidity() {
+    public void messageValidity() {
         $$(".input__sub").find(exactText("Истёк срок действия карты")).shouldBe(visible);
     }
 
-    public static void messageRequiredField() {
+    public void messageRequiredField() {
         $$(".input__sub").find(exactText("Поле обязательно для заполнения")).shouldBe(visible);
     }
 
-    public static void messageSendingRequest() {
-        $$(".input__sub").find(exactText("Отправляем запрос в Банк...")).shouldBe(visible);
-    }
-
-    public static void messageApprove() {
+    /*public void messageApprove() {
         $$(".input__sub").find(exactText("Операция одобрена Банком.")).shouldBe(visible);
     }
 
-    public static void messageDecline() {
+    public void messageDecline() {
         $$(".input__sub").find(exactText("Ошибка! Банк отказал в проведении операции.")).shouldBe(visible);
     }
+
+     */
 
     public void setCardDetails(String number, String cardMonth, String cardYear, String owner, String CVC) {
         cardNumber.setValue(number);

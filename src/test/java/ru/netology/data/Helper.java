@@ -9,7 +9,6 @@ import java.util.*;
 import static java.lang.String.valueOf;
 
 public class Helper {
-    private static Random random = new Random();
     private static Faker faker = new Faker();
     private static Faker fakerEn = new Faker(new Locale("En"));
     private static Faker fakerRu = new Faker(new Locale("Ru"));
@@ -17,15 +16,15 @@ public class Helper {
     // ВАЛИДНЫЕ ДАННЫЕ
     //Номер карты
 
-    public static String approvedCardNumber() {
-        String getApprovedNumber = "4444 4444 4444 4441";
-        return getApprovedNumber;
+    public static String getApprovedCardNumber() {
+        var approvedNumber = "4444 4444 4444 4441";
+        return approvedNumber;
     }
 
     //Владелец
     public static String getOwner() {
-        String randomFirstName = fakerEn.name().firstName();
-        String randomLastName = fakerEn.name().lastName();
+        var randomFirstName = fakerEn.name().firstName();
+        var randomLastName = fakerEn.name().lastName();
         return randomFirstName + " " + randomLastName;
     }
 
@@ -33,7 +32,7 @@ public class Helper {
     public static String getMonth() {
         String[] months = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
         Random index = new Random();
-        int indexInt = index.nextInt(months.length);
+        var indexInt = index.nextInt(months.length);
         return months[indexInt];
     }
 
@@ -44,48 +43,57 @@ public class Helper {
         String validity2 = LocalDate.now().plusYears(2).format(DateTimeFormatter.ofPattern("yy"));
         String validity3 = LocalDate.now().plusYears(3).format(DateTimeFormatter.ofPattern("yy"));
         String validity4 = LocalDate.now().plusYears(4).format(DateTimeFormatter.ofPattern("yy"));
+        String validity5 = LocalDate.now().plusYears(5).format(DateTimeFormatter.ofPattern("yy"));
 
-        String[] years = {now, validity1, validity2, validity3, validity4};
+        String[] years = {validity1, validity2, validity3, validity4, validity5};
         Random index = new Random();
-        int indexInt = index.nextInt(years.length);
+        var indexInt = index.nextInt(years.length);
         return years[indexInt];
     }
 
 
     //CVC
     public static String getCVC() {
-        return valueOf(faker.number().numberBetween(100, 999));
+        var CVC = valueOf(faker.number().numberBetween(100, 999));
+        return CVC;
     }
 
     // НЕВАЛИДНЫЕ ДАННЫЕ
 
     public static String getEmpty() {
-        return "";
+        var empty = "";
+        return empty;
     }
 
     // Номер карты
     public static String getDeclinedNumber() {
-        return "4444 4444 4444 4442";
+        var declinedNumber = "4444 4444 4444 4442";
+        return declinedNumber;
     }
 
     public static String getRandomNumber() {
-        return faker.numerify("#### #### #### ####");
+        var randomNumber = faker.numerify("#### #### #### ####");
+        return randomNumber;
     }
 
     public static String getZeroNumber() {
-        return "0000 0000 0000 0000";
+        var zeroNumber = "0000 0000 0000 0000";
+        return zeroNumber;
     }
 
     public static String getRandomDigit() {
-        return faker.numerify("#");
+        var randomDigit = faker.numerify("#");
+        return randomDigit;
     }
 
     public static String getRandomFifteenNumber() {
-        return faker.numerify("#### #### #### ###");
+        var randomFifteenNumber = faker.numerify("#### #### #### ###");
+        return randomFifteenNumber;
     }
 
     public static String getRandomSeventeenNumber() {
-        return faker.numerify("#### #### #### #####");
+        var randomSeventeenNumber = faker.numerify("#### #### #### #####");
+        return randomSeventeenNumber;
     }
 
     public static String getCyrillicLettersNumber() {
@@ -98,8 +106,9 @@ public class Helper {
         return englishLettersNumber;
     }
 
-    public static String getSymbolsNumber() { // подумать как заменить
-        return "@@@@ #### %%%% &&&&";
+    public static String getSymbolsNumber() {
+        var symbolsNumber = "@@@@ #### %%%% &&&&";
+        return symbolsNumber;
     }
 
 
@@ -110,11 +119,13 @@ public class Helper {
     }
 
     public static String getSymbolOwner() {
-        return "#&@$&+*^%№=";
+        var symbolOwner = "#&@$&+*^%№=";
+        return symbolOwner;
     }
 
     public static String getNumbersOwner() {
-        return faker.numerify("####### ######");
+        var numbersOwner = faker.numerify("####### ######");
+        return numbersOwner;
     }
 
     public static String getCyrillicOwner() {
@@ -136,49 +147,57 @@ public class Helper {
 
     // Месяц
     public static String getTwoZero() {
-        return "00";
+        var twoZero = "00";
+        return twoZero;
     }
 
     public static String getThirteenMonth() {
-        return "13";
+        var thirteenMonth = "13";
+        return thirteenMonth;
     }
 
     public static String getTwoLetters() {
-        return fakerEn.letterify("??");
+        var twoLetters = fakerEn.letterify("??");
+        return twoLetters;
     }
 
     // Год
     public static String getPastYear() {
-        LocalDate pastYear = LocalDate.now().minusYears(10);
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yy");
+        var pastYear = LocalDate.now().minusYears(10);
+        var format = DateTimeFormatter.ofPattern("yy");
         return pastYear.format(format);
     }
 
     public static String getMoreThanFiveYear() {
-        LocalDate date = LocalDate.now().plusYears(6);
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yy");
+        var date = LocalDate.now().plusYears(6);
+        var format = DateTimeFormatter.ofPattern("yy");
         return date.format(format);
     }
 
-    public static String getSymbolYear() { // подумать как заменить
-        return "@$";
+    public static String getSymbolYear() {
+        var symbolYear = "@$";
+        return symbolYear;
     }
 
 
     // CVC
     public static String getTwoSymbolsCVC() {
-        return faker.numerify("##");
+        var twoSymbolsCVC = faker.numerify("##");
+        return twoSymbolsCVC;
     }
 
     public static String getZeroCVC() {
-        return "000";
+        var zeroCVC = "000";
+        return zeroCVC;
     }
 
-    public static String getLettersCVC() { // подумать как заменить
-        return fakerEn.letterify("???");
+    public static String getLettersCVC() {
+        var lettersCVC = fakerEn.letterify("???");
+        return lettersCVC;
     }
 
-    public static String getSymbolCVC() { // подумать как заменить
-        return "@$&";
+    public static String getSymbolCVC() {
+        var symbolCVC = "@$&";
+        return symbolCVC;
     }
 }

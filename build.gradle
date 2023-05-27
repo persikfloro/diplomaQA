@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'io.qameta.allure' version '2.11.2'
+    id 'io.freefair.lombok' version '8.0.1'
 }
 
 group 'ru.netology'
@@ -8,9 +9,8 @@ version '1.0-SNAPSHOT'
 
 sourceCompatibility = 11
 
-compileJava.options.encoding = "UTF-8"
-compileTestJava.options.encoding = "UTF-8"
-
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
 
 
 allure {
@@ -27,27 +27,19 @@ repositories {
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
-    implementation 'org.seleniumhq.selenium:selenium-java:4.8.3'
-    implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '4.4.0'
     testImplementation 'com.codeborne:selenide:6.14.0'
     implementation group: 'com.github.javafaker', name: 'javafaker', version: '1.0.2'
     testImplementation 'io.qameta.allure:allure-selenide:2.22.0'
     testImplementation 'org.postgresql:postgresql:42.5.0'
     implementation 'mysql:mysql-connector-java:8.0.30'
-    testImplementation 'com.google.code.gson:gson:2.10'
     implementation 'commons-dbutils:commons-dbutils:1.7'
-    testImplementation 'io.rest-assured:json-schema-validator:5.2.0'
 }
 
 test {
     ignoreFailures = true
     useJUnitPlatform()
     systemProperty 'selenide.headless', System.getProperty('selenide.headless')
-    systemProperty 'file.encoding', 'UTF-8'
-    //Settings MySQL
-    systemProperty 'db.url', System.getProperty('db.url', "jdbc:mysql://localhost:3306/mysql")
-    // Settings PostgreSQL
-    //systemProperty 'db.url', System.getProperty('db.url', "jdbc:postgresql://localhost:5432/postgresql")
-    systemProperty 'db.user', System.getProperty('db.user','user') //
-    systemProperty 'db.password', System.getProperty('db.password','pass') //
+    systemProperty 'dbUrl', System.getProperty("dbUrl")
+    systemProperty 'dbUser', System.getProperty("dbUser", "user")
+    systemProperty 'dbPassword', System.getProperty("dbPassword", "pass")
 }
