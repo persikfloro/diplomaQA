@@ -7,12 +7,12 @@
 ### *При подключении к БД MySQL:*
 - Успешных тестов - 71% (52 теста)
 - Неуспешных тестов - 29% (21 тест)
-![](docs/mysql_allure_2605.png)
+![docs/mysql_allure_2605.png](https://github.com/persikfloro/diplomaQA/blob/main/docs/mysql_allure_2605.png)
 
 ### *При подключении к БД PostgreSQL:*
 - Успешных тестов - 71% (52 теста)
 - Неуспешных тестов - 29% (21 тест)
-![](docs/postgresql_allure_2705.png)
+![docs/postgresql_allure_2705.png](https://github.com/persikfloro/diplomaQA/blob/main/docs/postgresql_allure_2705.png)
 
 ## Общие рекомендации
 Список найденных дефектов и рекомендаций на улучшение сервиса находится в [Issues](https://github.com/persikfloro/diploma-qa/issues).
