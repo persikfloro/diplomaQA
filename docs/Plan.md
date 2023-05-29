@@ -5,7 +5,7 @@
 ### Тестовые данные
 [Таблица с подготовленными тестовыми данными](https://docs.google.com/spreadsheets/d/1pE9Ft4Kt7njVcU70UTWFc7-ujSZEmo5Jd9MjfQn5xvA/edit#gid=0)
 ### Перечень автоматизируемых сценариев
-[Тестовые сценарии UI-тестирования и тестирования API](https://docs.google.com/spreadsheets/d/1pE9Ft4Kt7njVcU70UTWFc7-ujSZEmo5Jd9MjfQn5xvA/edit#gid=1895355200)
+[Тестовые сценарии UI-тестирования](https://docs.google.com/spreadsheets/d/1pE9Ft4Kt7njVcU70UTWFc7-ujSZEmo5Jd9MjfQn5xvA/edit#gid=1895355200)
 ### Перечень используемых инструментов с обоснованием выбора
 1. _Среда разработки IntelliJ IDEA_ - специализированная среда для разработки и автоматизации тестирования на Java;
 2. _Тестовый фреймворк и библиотека JUnit5_ - совместима JVM, содержит необходимые аннотации и assert’ы для автоматизации тестирования;

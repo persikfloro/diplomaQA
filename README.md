@@ -1,7 +1,7 @@
 # Дипломный проект по профессии «Тестировщик»
 ## Документация
 * [Текст задания](https://github.com/netology-code/qa-diploma/blob/master/README.md)
-* [План автоматизации](Plan.md)
+* [План автоматизации](https://github.com/persikfloro/diplomaQA/blob/main/docs/Plan.md)
 * [Отчёт о проведенном тестировании](https://github.com/persikfloro/diplomaQA/blob/b18e6694aa9985b48184ff83fe79c22fd4315909/docs/Report.md)
 * [Отчет о проведённой автоматизации тестирования](https://github.com/persikfloro/diplomaQA/blob/b18e6694aa9985b48184ff83fe79c22fd4315909/docs/Summary.md)
 ## Инструкция для запуска автотестов
