@@ -17,14 +17,14 @@ public class Helper {
     //Номер карты
 
     public static String getApprovedCardNumber() {
-        var approvedNumber = "4444 4444 4444 4441";
+        String approvedNumber = "4444 4444 4444 4441";
         return approvedNumber;
     }
 
     //Владелец
     public static String getOwner() {
-        var randomFirstName = fakerEn.name().firstName();
-        var randomLastName = fakerEn.name().lastName();
+        String randomFirstName = fakerEn.name().firstName();
+        String randomLastName = fakerEn.name().lastName();
         return randomFirstName + " " + randomLastName;
     }
 
@@ -32,7 +32,7 @@ public class Helper {
     public static String getMonth() {
         String[] months = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
         Random index = new Random();
-        var indexInt = index.nextInt(months.length);
+        int indexInt = index.nextInt(months.length);
         return months[indexInt];
     }
 
@@ -54,45 +54,45 @@ public class Helper {
 
     //CVC
     public static String getCVC() {
-        var CVC = valueOf(faker.number().numberBetween(100, 999));
+        String CVC = valueOf(faker.number().numberBetween(100, 999));
         return CVC;
     }
 
     // НЕВАЛИДНЫЕ ДАННЫЕ
 
     public static String getEmpty() {
-        var empty = "";
+        String empty = "";
         return empty;
     }
 
     // Номер карты
     public static String getDeclinedNumber() {
-        var declinedNumber = "4444 4444 4444 4442";
+        String declinedNumber = "4444 4444 4444 4442";
         return declinedNumber;
     }
 
     public static String getRandomNumber() {
-        var randomNumber = faker.numerify("#### #### #### ####");
+        String randomNumber = faker.numerify("#### #### #### ####");
         return randomNumber;
     }
 
     public static String getZeroNumber() {
-        var zeroNumber = "0000 0000 0000 0000";
+        String zeroNumber = "0000 0000 0000 0000";
         return zeroNumber;
     }
 
     public static String getRandomDigit() {
-        var randomDigit = faker.numerify("#");
+        String randomDigit = faker.numerify("#");
         return randomDigit;
     }
 
     public static String getRandomFifteenNumber() {
-        var randomFifteenNumber = faker.numerify("#### #### #### ###");
+        String randomFifteenNumber = faker.numerify("#### #### #### ###");
         return randomFifteenNumber;
     }
 
     public static String getRandomSeventeenNumber() {
-        var randomSeventeenNumber = faker.numerify("#### #### #### #####");
+        String randomSeventeenNumber = faker.numerify("#### #### #### #####");
         return randomSeventeenNumber;
     }
 
@@ -107,10 +107,9 @@ public class Helper {
     }
 
     public static String getSymbolsNumber() {
-        var symbolsNumber = "@@@@ #### %%%% &&&&";
+        String symbolsNumber = "@@@@ #### %%%% &&&&";
         return symbolsNumber;
     }
-
 
     // Владелец
     public static String getOverLimitLettersOwner() {
@@ -119,12 +118,12 @@ public class Helper {
     }
 
     public static String getSymbolOwner() {
-        var symbolOwner = "#&@$&+*^%№=";
+        String symbolOwner = "#&@$&+*^%№=";
         return symbolOwner;
     }
 
     public static String getNumbersOwner() {
-        var numbersOwner = faker.numerify("####### ######");
+        String numbersOwner = faker.numerify("####### ######");
         return numbersOwner;
     }
 
@@ -147,57 +146,57 @@ public class Helper {
 
     // Месяц
     public static String getTwoZero() {
-        var twoZero = "00";
+        String twoZero = "00";
         return twoZero;
     }
 
     public static String getThirteenMonth() {
-        var thirteenMonth = "13";
+        String thirteenMonth = "13";
         return thirteenMonth;
     }
 
     public static String getTwoLetters() {
-        var twoLetters = fakerEn.letterify("??");
+        String twoLetters = fakerEn.letterify("??");
         return twoLetters;
     }
 
     // Год
     public static String getPastYear() {
-        var pastYear = LocalDate.now().minusYears(10);
-        var format = DateTimeFormatter.ofPattern("yy");
+        LocalDate pastYear = LocalDate.now().minusYears(10);
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yy");
         return pastYear.format(format);
     }
 
     public static String getMoreThanFiveYear() {
-        var date = LocalDate.now().plusYears(6);
-        var format = DateTimeFormatter.ofPattern("yy");
+        LocalDate date = LocalDate.now().plusYears(6);
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yy");
         return date.format(format);
     }
 
     public static String getSymbolYear() {
-        var symbolYear = "@$";
+        String symbolYear = "@$";
         return symbolYear;
     }
 
 
     // CVC
     public static String getTwoSymbolsCVC() {
-        var twoSymbolsCVC = faker.numerify("##");
+        String twoSymbolsCVC = faker.numerify("##");
         return twoSymbolsCVC;
     }
 
     public static String getZeroCVC() {
-        var zeroCVC = "000";
+        String zeroCVC = "000";
         return zeroCVC;
     }
 
     public static String getLettersCVC() {
-        var lettersCVC = fakerEn.letterify("???");
+        String lettersCVC = fakerEn.letterify("???");
         return lettersCVC;
     }
 
     public static String getSymbolCVC() {
-        var symbolCVC = "@$&";
+        String symbolCVC = "@$&";
         return symbolCVC;
     }
 }

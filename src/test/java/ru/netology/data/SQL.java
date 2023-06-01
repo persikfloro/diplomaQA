@@ -3,6 +3,7 @@ package ru.netology.data;
 import lombok.*;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
+
 import java.sql.DriverManager;
 
 public class SQL {
@@ -18,20 +19,18 @@ public class SQL {
     @SneakyThrows
     public static String checkPaymentStatus() {
         var dataSQL = "SELECT status FROM payment_entity";
-        try (var conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword)) {
-            var result = runner.query(conn, dataSQL, new ScalarHandler<String>());
-            return result;
-        }
+        var conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+        var result = runner.query(conn, dataSQL, new ScalarHandler<String>());
+        return result;
     }
 
 
     @SneakyThrows
     public static String checkCreditStatus() {
         var dataSQL = "SELECT status FROM credit_request_entity";
-        try (var conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword)) {
-            var result = runner.query(conn, dataSQL, new ScalarHandler<String>());
-            return result;
-        }
+        var conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+        var result = runner.query(conn, dataSQL, new ScalarHandler<String>());
+        return result;
     }
 
     @SneakyThrows

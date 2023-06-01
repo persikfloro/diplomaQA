@@ -10,12 +10,6 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
 public class PaymentPage {
-
-    private String url = System.getProperty("dbUrl");
-    private String user = System.getProperty("dbUser");
-    private String password = System.getProperty("ddPassword");
-
-
     List<SelenideElement> input = $$(".input__control");
     SelenideElement cardNumber = input.get(0);
     SelenideElement month = input.get(1);
@@ -59,15 +53,6 @@ public class PaymentPage {
         $$(".input__sub").find(exactText("Поле обязательно для заполнения")).shouldBe(visible);
     }
 
-    /*public void messageApprove() {
-        $$(".input__sub").find(exactText("Операция одобрена Банком.")).shouldBe(visible);
-    }
-
-    public void messageDecline() {
-        $$(".input__sub").find(exactText("Ошибка! Банк отказал в проведении операции.")).shouldBe(visible);
-    }
-
-     */
 
     public void setCardDetails(String number, String cardMonth, String cardYear, String owner, String CVC) {
         cardNumber.setValue(number);
