@@ -47,7 +47,7 @@ public class Helper {
 
         String[] years = {validity1, validity2, validity3, validity4, validity5};
         Random index = new Random();
-        var indexInt = index.nextInt(years.length);
+        int indexInt = index.nextInt(years.length);
         return years[indexInt];
     }
 
